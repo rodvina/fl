@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Forms Library</title>
+    <link rel="stylesheet" href="../../resources/css/style.css" type="text/css" th:href="@{/resources/css/style.css}"/>
+</head>
+<body>
+<h1>
+	Forms Library
+</h1>
+
+
+<p>Click <a href="./searchView.html" th:href="@{/search}"> to start searching</a> now!</p>
+<span th:text="${action}">The Action</span>
+</body>
+</html>

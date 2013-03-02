@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<style type="text/css" title="currentStyle">
+    @import "../../resources/css/demo_page.css";
+    @import "../../resources/css/jquery.dataTables.css";
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script type="text/javascript" language="javascript" src="../../resources/js/jquery.dataTables.min.js" th:src="@{/resources/js/jquery.dataTables.min.js}"></script>
+<script type="text/javascript" language="javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+
+			$(document).ready(function() {
+				$('#resultsTable').dataTable( {
+					"bFilter": true,
+					"bStateSave": true,
+					"bSort" : true,
+					"bPaginate": false,
+					"sScrollY": "200px",
+					"bScrollCollapse": true,
+				    "oLanguage": {
+				      "sSearch": "Filter results:"
+				    },
+				} );
+				
+				$("input[name='submit']").click(function(){
+					    $('#results').toggle();
+						$('#advancedFields').hide();
+				});
+				
+				$('#advancedLink').click(function() {
+					$('#advancedFields').toggle();
+				});
+				
+		        $("input[type='date']").datepicker();
+
+				$("#submitLegacy").click(function() {
+					$("#resultsForm").attr("action", "detailsView-Legacy.html");
+				});
+				
+			
+			} );
+		</script>
+<style type="text/css">
+.hideme {
+	display: none;
+}
+body {
+	font-family: Calibri;
+	font-size: 14px;
+}
+
+option	 {
+	font-family: Calibri;
+	font-size: 14px;
+}
+</style>
+</head>
+<body>
+<DIV style="margin: 6px">
+
+
+<H3 align="center" style="margin-bottom: 3px">Search Criteria</H3>
+<table width="757" border="0" id="searchTable">
+  <tr>
+    <td width="244"><table width="100%" border="0" cellspacing="10">
+      <tr>
+        <td width="193"><p>Form Number:<span class="input">
+
+          <input type="text" style="width:90%" name="formName4" />
+          </span></p>
+          <p>Form Name:<span class="input">
+            <input name="formName" type="text" style="width:90%" maxlength="66" />
+            </span></p></td>
+        <td width="94">State:
+           <select name="state2" size="5" multiple="true">
+            <option>-- Any --</option>
+            <option value="00">Alabama </option>
+            <option>Arkansas</option>
+              <option>Alaska</option>
+                <option>California</option>
+                <option>Delaware</option>   
+                <option>Georgia</option>
+            </select></td>
+        <td width="124">Line Of Business
+          <select name="lob2" size="5" multiple="true">
+            <option>-- Any --</option>
+            <option>All</option>
+            <option>Auto Monoline</option>
+            <option>Auto Package</option>
+            <option>Boat</option>
+            <option>Dwelling Fire</option>
+            <option>Home Monoline</option>
+            <option>Home Package</option>
+            <option>PCL</option>
+            </select></td>
+        <td width="108">Contract Type
+          <select name="contractType2" size="5" multiple="true" id="contractType2" >
+            <option>-- Any --</option>
+            <option value="00">All</option>
+            <option>Auto Single</option>
+            <option>Auto Split</option>
+            <option>DP1</option>
+            <option>DP2</option>
+            <option>DP3</option>
+            <option>HE 7</option>
+            <option>HO-2/HO-A+</option>
+            <option>HO-3/HO-B</option>
+            <option>HO-4/HO-BT</option>
+            </select></td>
+        <td width="192">Company
+          <select name="company2" size="5" multiple="true">
+            <option value="00">-- Any --</option>
+              <option>All</option>
+                <option>HSCM</option>
+                <option>KGA</option>
+                <option>KIC-Kemper Independence</option>
+                <option>TUIC-Trinity Universal</option>
+                <option>UA-Unitrin Advantage</option>
+                <option>UAH-Unitrin Auto &amp; Home</option>
+                <option>UPIC-Unitrin Preferred</option>
+                <option>USIC-Unitrin Safeguard</option>
+                <option>VPIC-Valley P&amp;C</option>              
+            </select></td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+<table width="985">
+    <tr><td><a href="#" id="advancedLink">Advanced Search</a></td></tr>
+		<tr>
+		<td>
+		<div id="advancedFields" class="hideme">
+		  <table width="751" border="0" cellspacing="10">
+		    <tr>
+			    <td width="214"><label>Form Type:
+			      <select name="formType2" size="3" multiple="true">
+			        <option value="00">-- Any --</option>
+		            <option>Amendatory</option>
+		            <option>Endorsement</option>
+	                <option>Insert</option>
+	                <option>Contract</option>
+                    <option>Jacket</option>
+                    <option>Special Insert</option>
+                    <option>Customer Docs</option>
+                    <option>Billing</option>
+                    <option>U/W Correspondence</option>
+                    <option>Credit</option>                  
+                  </select>
+			    </label></td>
+			    <td width="218"><label>Print Category:
+			      <select name="printCat" size="3" multiple="true" id="printCat" >
+			        <option>Always First</option>
+			        <option>Before Dec Insert</option>
+			        <option>Special</option>
+			        <option>Declarations</option>
+			        <option>Schedules (SPP/EE)</option>
+			        <option>After Dec Insert</option>
+			        <option>Policy Jacket</option>
+			        <option>Policy Contract</option>
+			        <option>Amendatory</option>
+			        <option>Priority Endorsement</option>
+		          </select>
+			    </label></td>
+			    <td width="283">Coverage Code:
+			      <select name="printCat2" size="3" multiple="true" id="printCat2" >
+			        <option>-- Any --</option>
+			        <option>All</option>
+			        <option>Unit Owners Coverage - Special Coverage</option>
+			        <option>Additional Insured</option>
+			        <option>Additional Residence Rented to Others</option>
+			        <option>Discount on Premises Alarm Systems</option>
+			        <option>Additional Living Expense - Coverage E</option>
+              </select></td>
+		    </tr>
+			  <tr>
+			    <td>Event:
+<select name="formType" size="3" multiple="true">
+		          <option value="00">-- Any --</option>
+		            <option>All</option>
+		            <option value="ADD">New Business</option>
+	                <option value="MOD">Amendment</option>
+	                <option>Renewal</option>
+                    <option>Cancellation</option>
+                    <option>NP Cancel</option>
+                    <option>Finalization</option>
+                    <option>Special Conversion</option>
+                    <option>Kemper Conversion</option>
+                    <option>Rewrite</option>
+                </select></td>
+			    <td>Bulk Renewal:
+<select name="formType3" size="3" multiple="true">
+		          <option value="00">-- Any --</option>
+		            <option>TBD</option>
+		            <option>TBD</option>
+		            <option>TBD</option>
+		            <option>TBD</option>
+                </select></td>
+			    <td>Rule ID:
+			      <select name="ruleId" size="3" multiple="true" id="ruleId" >
+			        <option value="00">-- Any --</option>
+		            <option>PCS - Consumer Report Disclosure</option>
+		            <option>Mueller - Consumer Report Disclosure</option>
+	                <option>LexisNexis - Consumer Report Disclosure </option>
+	                <option>Owner Occupied </option>
+                    <option>OWNER Occupied or no Coverage A </option>
+                </select></td>
+		      </tr>
+			  <tr>
+			    <td>NB Eff Date:
+		        <input name="nbEffDate" type="date" id="nbEffDate"></input></td>
+			    <td>NB Exp Date:
+		        <input name="nbExpDate" type="date" id="nbExpDate"></input></td>
+			    <td><p>Premium Indicator:
+<select name="contractType3" size="3" multiple="true" id="contractType3" >
+                    <option>-- Any --</option>
+                      <option value="00">Y</option>
+                      <option>N</option>
+                    </select>
+			    </p></td>
+		    </tr>
+			  <tr>
+			    <td>REN Eff Date:
+                <input name="renEffDate" type="date" id="renEffDate"/></td>
+			    <td>REN Eff Date:
+                <input name="renExpDate" type="date" id="renExpDate"/></td>
+			    <td>Level Indicator:
+<select name="levelIndicator2" size="3" multiple="true" id="levelIndicator2" >
+                  <option></option>
+                    <option>Policy</option>
+                    <option value="00">Activity</option>
+                </select></td>
+		    </tr>
+		  </table>
+        </div>
+		</td>
+		</tr>
+	</table>
+	<table id="thetable1">
+		<tr>
+			<td colspan="2"></td>
+			<td colspan="2"><input name="submit" type="submit" value="Search"/><input type="button" value="Clear"/></td>
+		</tr>
+	</table>
+  <p>&nbsp;</p>
+</DIV>
+<div id="results"  class="hideme">
+<H3 align="center" style="margin-bottom: 3px">Search Results</H3>	
+<form action="detailsView-New.html" id="resultsForm">
+<table width="757" border="0" cellspacing="2" id="resultsTable" class="display">
+  <thead>
+  <tr>
+    <th>Form Number</th>
+    <th>Form Name</th>
+    <th><div align="center">PDF</div></th>
+    <th><div align="center">Details</div></th>
+    <th><div align="center">Print</div></th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>AK18380389 </td>
+    <td>FAIR CREDIT REPORTING ACT</td>
+    <td><div align="center"><a href="../../../testResources/mooreform.pdf"><img src="../../resources/images/icon_pdf.png" width="28" height="28"/></a></div></td>
+    <td><div align="center"><a href="detailsView-New.html"><img src="../../resources/images/viewDetails.gif" width="28" height="30"/></a></div></td>
+    <td><div align="center">
+      <input type="checkbox"/>
+    </div></td>
+    </tr>
+  <tr>
+    <td>AK31610290 </td>
+    <td>FAIR CREDIT/PRIVACY LAW</td>
+    <td><div align="center"><a href="../../../testResources/mooreform.pdf"><img src="../../resources/images/icon_pdf.png" width="28" height="28"/></a></div></td>
+    <td><div align="center"><a href="detailsView-New.html"><img src="../../resources/images/viewDetails.gif" width="28" height="30"/></a></div></td>
+    <td><div align="center">
+      <input type="checkbox"/>
+    </div></td>
+    </tr>
+  <tr>
+    <td>AK53550606</td>
+    <td>Fair Credit Reporting Act-Impt Notice</td>
+    <td><div align="center"><a href="../../../testResources/mooreform.pdf"><img src="../../resources/images/icon_pdf.png" width="28" height="28"/></a></div></td>
+    <td><div align="center"><a href="detailsView-New.html"><img src="../../resources/images/viewDetails.gif" width="28" height="30"/></a></div></td>
+    <td><div align="center">
+      <input type="checkbox"/>
+    </div></td>
+    </tr>
+  <tr>
+    <td>AK53550606</td>
+    <td>Fair Credit Reporting Act-Impt Notice</td>
+    <td><div align="center"><a href="../../../testResources/mooreform.pdf"><img src="../../resources/images/icon_pdf.png" width="28" height="28"/></a></div></td>
+    <td><div align="center"><a href="detailsView-New.html"><img src="../../resources/images/viewDetails.gif" width="28" height="30"/></a></div></td>
+    <td><div align="center">
+      <input type="checkbox"/>
+    </div></td>
+    </tr>
+  <tr>
+    <td>AK56010309</td>
+    <td>Fair Credit Reporting Act-IMPT Notice</td>
+    <td><div align="center"><a href="../../../testResources/mooreform.pdf"><img src="../../resources/images/icon_pdf.png" width="28" height="28"/></a></div></td>
+    <td><div align="center"><a href="detailsView-New.html"><img src="../../resources/images/viewDetails.gif" width="28" height="30"/></a></div></td>
+    <td><div align="center">
+      <input type="checkbox"/>
+    </div></td>
+    </tr>
+  <tr>
+    <td>AK56011212</td>
+    <td>Fair Credit Reporting Act - Important Notice</td>
+    <td><div align="center"><a href="../../../testResources/mooreform.pdf"><img src="../../resources/images/icon_pdf.png" width="28" height="28"/></a></div></td>
+    <td><div align="center"><a href="detailsView-New.html"><img src="../../resources/images/viewDetails.gif" width="28" height="30"/></a></div></td>
+    <td><div align="center">
+      <input type="checkbox"/>
+    </div></td>
+    </tr>
+  <tr>
+    <td>K56261212</td>
+    <td>Fair Credit Reporting Act - Important Notice</td>
+    <td><div align="center"><a href=""><img src="../../resources/images/icon_pdf.png" width="28" height="28"/></a></div></td>
+    <td><div align="center"><a href="detailsView-New.html"><img src="../../resources/images/viewDetails.gif" width="28" height="30"/></a></div></td>
+    <td><div align="center">
+      <input type="checkbox"/>
+    </div></td>
+    </tr>
+  </tbody>
+  </table>
+  </form>
+</div>
+</body>		
+</html>
